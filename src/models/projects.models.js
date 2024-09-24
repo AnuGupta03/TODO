@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 const projectsSchema = new mongoose.Schema(
     {
+        owner:[{
+            type: mongoose.ObjectId,
+            ref:'Users',
+         }],
         name:{
             type:String,
             required:true,
@@ -14,21 +18,18 @@ const projectsSchema = new mongoose.Schema(
             required:true
         },
         admin:[{
-            type: ObjectId,
+            type: mongoose.ObjectId,
             ref:'Users',
          }],
          tasks:[{
-            type:ObjectId,
+            type: mongoose.ObjectId,
             ref:'Tasks'
          }],
-        createdAt:{
-            type:timestamp,
-            required:true
-        },
         members:[{
-            type : ObjectId, 
+            type : mongoose.ObjectId, 
             ref: 'Users'  
         }]
     },{timestamps:true}
 )
-export const projects = mongoose.model("Projects", projectsSchema);
+
+export const projects = mongoose.models.projects || mongoose.model("projects", projectsSchema)

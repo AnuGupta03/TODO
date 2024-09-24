@@ -14,14 +14,10 @@ const tasksSchema = new mongoose.Schema(
             required:true
         },
         createdBy:{
-            type:ObjectId,
+            type: mongoose.ObjectId,
             ref: 'Users',
             required:true
-         },
-        createdAt:{
-            type:timestamp,
-            required:true
-        }   
+         }  
     },{timestamps:true}
 )
 export const tasks = mongoose.model("Tasks", tasksSchema);
