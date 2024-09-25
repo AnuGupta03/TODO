@@ -4,8 +4,10 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { HomeIcon, SearchIcon, SettingsIcon, UserIcon } from "lucide-react";
-// import ObjectId from "mongodb";
+import { HomeIcon, SettingsIcon, UserIcon } from "lucide-react";
+import { toast } from "sonner"
+ 
+
 
 import {
   Command,
@@ -46,7 +48,7 @@ export default function Sidebar() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
-  // const [projectstate, setprojectstate] = React.useState()
+
 
   const handleCreateProject = async (event: any) =>{
     event.preventDefault();
@@ -71,12 +73,24 @@ export default function Sidebar() {
 
       console.log("Project Created:", responseData);
       setOpen(false);  
+      // toast("Event has been created.")
+      toast(`${name} has been created.`)
+
     } catch (error){
       console.error("Error Creating project:", error);
-      
     }
   };
 
+  React.useEffect(() => {
+    fetch('/api/project')
+    .then(res =>{
+      return res.json()
+    })
+    .then(data =>{
+      console.log(data);
+      setValue(data)
+    })
+  }, []);
 
   return (
     <div className="h-screen w-64 bg-neutral-100 dark:bg-slate-900 flex flex-col py-4">
