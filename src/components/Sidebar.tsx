@@ -118,7 +118,12 @@ export default function Sidebar() {
                 <CommandList>
                   <CommandEmpty>No framework found.</CommandEmpty>
                   <CommandGroup>
-                  {datastore.posts?.map(data => <CommandItem key={data._id}>{data.name}</CommandItem>)}
+                  {datastore.posts?.map(data => (
+                    <CommandItem key={data._id}>
+                    <Link href={`/project/${data._id}`} className="w-full">
+                      {data.name}
+                    </Link>
+                    </CommandItem>))}
                     <Dialog>
                       <CommandItem>
                         <DialogTrigger asChild>
