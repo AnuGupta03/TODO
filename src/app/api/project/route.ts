@@ -1,7 +1,7 @@
 import { getDataFromToken } from "@/helpers/getDataFromToken";
 import { addProject, getProjects } from "@/lib/data";
 import connectToDatabase from "@/lib/db";
-import { projects } from "@/models/projects.models";
+import  Projects from "@/models/projects.models";
 import { NextRequest, NextResponse } from "next/server";
 
 // Handler for GET requests
@@ -12,6 +12,7 @@ export const GET = async (req: NextRequest) => {
 
     // Fetch projects
     const posts = await getProjects();
+    
     return NextResponse.json({ message: "OK", posts }, { status: 200 });
   } catch (err) {
     // Handle errors and send a response
@@ -44,7 +45,7 @@ export const POST = async (req: NextRequest) => {
     }
 
     // Create a new project instance
-    const newProject = new projects({ name, description, owner: userId, state: "active" });
+    const newProject = new Projects({ name, description, owner: userId, state: "active" });
     console.log(newProject);
     
     // Save the project to the database

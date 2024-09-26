@@ -1,3 +1,5 @@
+import Projects  from "@/models/projects.models";
+import mongoose from "mongoose";
 type project = {
     id: string
     title: string
@@ -7,7 +9,15 @@ type project = {
 let projects: project[] = [];
 
 // handlers
-export const getProjects = () => projects;
+export const getProjects = async () => {
+    try{
+        const products = await Projects.find({});
+        console.log(products);
+        return products
+    } catch (error) {
+        console.log(error);        
+    }
+};
 
 export const addProject = (project: project) =>{
     projects.push(project);
